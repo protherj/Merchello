@@ -70,6 +70,7 @@
     <key alias="saleInformation">Sale Information</key>
     <!-- actions -->
 		<key alias="filter">Filter Orders</key>
+    <key alias="resetFilters">Reset Filters</key>
     <key alias="capturePayment">Capture Payment</key>
     <key alias="processPayment">Process Payment</key>
       

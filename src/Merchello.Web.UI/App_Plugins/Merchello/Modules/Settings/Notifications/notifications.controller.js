@@ -22,6 +22,8 @@
             addAddress: false,
             deleteAddress: false
         };
+        $scope.loaded = false;
+        $scope.noProviders = false;
 
         /**
          * @ngdoc method
@@ -53,13 +55,14 @@
                     return new merchello.Models.NotificationGatewayProvider(providerFromServer);
                 });
 
+                if ($scope.notificationGatewayProviders.length == 0) {
+                    $scope.noProviders = true;
+                }
+
                 _.each($scope.notificationGatewayProviders, function (provider) {
                     $scope.loadNotificationGatewayResources(provider.key);
                     $scope.loadNotificationMethods(provider.key);
                 });
-
-                $scope.loaded = true;
-                $scope.preValuesLoaded = true;
 
             }, function (reason) {
 
@@ -136,6 +139,9 @@
                 provider.methods = _.map(allMethods, function (methodFromServer) {
                     return new merchello.Models.NotificationMethod(methodFromServer);
                 });
+
+                $scope.loaded = true;
+                $scope.preValuesLoaded = true;
 
             }, function (reason) {
 

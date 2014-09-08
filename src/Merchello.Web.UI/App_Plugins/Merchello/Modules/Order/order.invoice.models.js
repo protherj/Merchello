@@ -92,7 +92,7 @@
 			self.invoiceKey = data.invoiceKey;
 			self.orderNumberPrefix = data.orderNumberPrefix;
 			self.orderNumber = data.orderNumber;
-			self.orderDate = data.orderDate;
+			self.orderDate = new Date(data.orderDate);
 			self.orderStatusKey = data.orderStatusKey;
 			self.orderStatus = new merchello.Models.OrderStatus(data.orderStatus);
 			self.exported = data.exported;
@@ -185,7 +185,7 @@
 			self.customerKey = data.customerKey;
 			self.invoiceNumberPrefix = data.invoiceNumberPrefix;
 			self.invoiceNumber = data.invoiceNumber;               
-			self.invoiceDate = data.invoiceDate;               
+			self.invoiceDate = new Date(data.invoiceDate);               
 			self.invoiceStatusKey = data.invoiceStatusKey;
 			self.invoiceStatus = new merchello.Models.InvoiceStatus(data.invoiceStatus);
 			self.billToName = data.billToName;
