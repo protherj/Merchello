@@ -70,6 +70,8 @@
     <key alias="filter">Filter Invoices</key>
     <key alias="capturePayment">Capture Payment</key>
     <key alias="processPayment">Process Payment</key>
+    <key alias="DownloadCSV">Download Order CSV</key>
+    <key alias="resetFilters">Reset Filters</key>
 
     <!-- phrases -->
     <key alias="invoicesPerPage">Invoices / Page</key>

@@ -68,12 +68,13 @@
     <key alias="orderName">[Order Name]</key>
     <key alias="sales">Sales</key>
     <key alias="saleInformation">Sale Information</key>
-    <key alias="merchelloGeneral_DownloadCSV">Download Order CSV</key>
     <!-- actions -->
 		<key alias="filter">Filter Orders</key>
     <key alias="capturePayment">Capture Payment</key>
     <key alias="processPayment">Process Payment</key>
-      
+    <key alias="DownloadCSV">Download Order CSV</key>
+    <key alias="resetFilters">Reset Filters</key>
+
     <!-- phrases -->
     <key alias="invoicesPerPage">Invoices / Page</key>
     <key alias="noOrders">You have no orders.</key>

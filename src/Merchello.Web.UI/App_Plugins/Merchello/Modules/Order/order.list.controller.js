@@ -9,8 +9,6 @@
      * The controller for the orders list page
      */
     controllers.OrderListController = function ($scope, $element, angularHelper, assetsService, notificationsService, merchelloInvoiceService, merchelloSettingsService) {
-        
-
 
 
         //--------------------------------------------------------------------------------------
@@ -64,21 +62,6 @@
                 $element.find(pickerId).datetimepicker("destroy");
             });
         };
-
-
-        assetsService.loadCss('lib/datetimepicker/bootstrap-datetimepicker.min.css').then(function () {
-            var filesToLoad = ["lib/datetimepicker/bootstrap-datetimepicker.min.js"];
-            assetsService.load(filesToLoad).then(
-                function () {
-                    //The Datepicker js and css files are available and all components are ready to use.
-
-                    $scope.setupDatePicker("#filterStartDate");
-                    $element.find("#filterStartDate").datetimepicker().on("changeDate", $scope.applyDateStart);
-
-                    $scope.setupDatePicker("#filterEndDate");
-                    $element.find("#filterEndDate").datetimepicker().on("changeDate", $scope.applyDateEnd);
-                });
-        });
 
         //--------------------------------------------------------------------------------------
         // Initialization methods
@@ -145,6 +128,21 @@
          * Method called on intial page load.  Loads in data from server and sets up scope.
          */
         $scope.init = function () {
+
+            assetsService.loadCss('lib/datetimepicker/bootstrap-datetimepicker.min.css').then(function () {
+                var filesToLoad = ["lib/datetimepicker/bootstrap-datetimepicker.min.js"];
+                assetsService.load(filesToLoad).then(
+                    function () {
+                        //The Datepicker js and css files are available and all components are ready to use.
+
+                        $scope.setupDatePicker("#filterStartDate");
+                        $element.find("#filterStartDate").datetimepicker().on("changeDate", $scope.applyDateStart);
+
+                        $scope.setupDatePicker("#filterEndDate");
+                        $element.find("#filterEndDate").datetimepicker().on("changeDate", $scope.applyDateEnd);
+                    });
+            });
+
             $scope.setVariables();
             $scope.loadInvoices();
             $scope.loadSettings();
@@ -274,6 +272,20 @@
                     $scope.filterEndDate = e.localDate.toIsoDateString();
                 }
             });
+        }
+
+        /**
+         * @ngdoc method
+         * @name downloadOrderCSV
+         * @function
+         * 
+         * @description
+         * Downloads a CSV of the current page of Orders displaying
+         * 
+         * TODO: Call a WebApi method to get the most recent 100 orders (Merchello limits it to 100)
+         */
+        $scope.downloadOrderCSV = function () {
+            $scope.exportTableToCSV.apply(this, [$('#orderListTable'), 'export.csv']);
         }
 
         //--------------------------------------------------------------------------------------
@@ -445,10 +457,17 @@
             });
         };
 
-        $scope.downloadOrderCSV = function() {
-            $scope.exportTableToCSV.apply(this, [$('#orderListTable>table'), 'export.csv']);
-        }
 
+        /**
+         * @ngdoc method
+         * @name exportTableToCSV
+         * @function
+         * 
+         * @description
+         * Export the Orders Table to CSV.
+         * 
+         * TODO: refactor to use a WebApi call
+         */
         $scope.exportTableToCSV = function ($table, filename) {
             var $rows = $table.find('tr:has(td)'),
 
@@ -489,8 +508,6 @@
                 });
             
         }
-
-        $scope.init();
 
     };
 
