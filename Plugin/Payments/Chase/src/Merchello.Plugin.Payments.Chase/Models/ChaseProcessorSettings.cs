@@ -21,6 +21,7 @@
         public string DelimitedChar { get; set; }
         public string EncapChar { get; set; }
         public bool RelayResponse { get; set; }
+        public string SdkLocation { get; set; }
 
         public string ApiVersion
         {
