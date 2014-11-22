@@ -8,11 +8,13 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
+using log4net.Core;
 using Merchello.Core.Gateways.Payment;
 using Merchello.Core.Models;
 using Merchello.Plugin.Payments.Chase.Models;
 using Paymentech;
 using Umbraco.Core;
+using Umbraco.Core.Persistence;
 
 namespace Merchello.Plugin.Payments.Chase
 {
@@ -47,7 +49,7 @@ namespace Merchello.Plugin.Payments.Chase
 			Paymentech.Response response;
 
 			// Create an authorize transaction
-            var transaction = new Transaction(RequestType.NEW_ORDER_TRANSACTION);
+            var transaction = new Paymentech.Transaction(_settings.SdkLocation, RequestType.NEW_ORDER_TRANSACTION);
 			// Populate the required fields for the given transaction type. You can use’
 			// the Paymentech Transaction Appendix to help you populate the transaction’
 
@@ -226,7 +228,7 @@ namespace Merchello.Plugin.Payments.Chase
             Paymentech.Response response;
 
             // Create an authorize transaction
-            var transaction = new Transaction(RequestType.MARK_FOR_CAPTURE_TRANSACTION);
+            var transaction = new Paymentech.Transaction(_settings.SdkLocation, RequestType.MARK_FOR_CAPTURE_TRANSACTION);
 
             var txRefNum = payment.ExtendedData.GetValue(Constants.ExtendedDataKeys.TransactionReferenceNumber);
 
@@ -321,7 +323,7 @@ namespace Merchello.Plugin.Payments.Chase
             Paymentech.Response response;
 
             // Create an authorize transaction
-            var transaction = new Transaction(RequestType.ECOMMERCE_REFUND);
+            var transaction = new Paymentech.Transaction(_settings.SdkLocation, RequestType.ECOMMERCE_REFUND);
 
             var txRefNum = payment.ExtendedData.GetValue(Constants.ExtendedDataKeys.TransactionReferenceNumber);
 
@@ -403,7 +405,7 @@ namespace Merchello.Plugin.Payments.Chase
             Paymentech.Response response;
 
             // Create an authorize transaction
-            var transaction = new Transaction(RequestType.VOID);
+            var transaction = new Paymentech.Transaction(_settings.SdkLocation, RequestType.VOID);
 
             var txRefNum = payment.ExtendedData.GetValue(Constants.ExtendedDataKeys.TransactionReferenceNumber);
 

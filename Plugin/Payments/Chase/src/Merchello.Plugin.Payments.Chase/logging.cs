@@ -6,13 +6,13 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace AlpsMembershipManagement
+namespace Merchello.Plugin.Payments.Chase
 {
     public static class logging
     {
         public static string GetTempPath()
         {
-            string path = HttpContext.Current.Server.MapPath("~") + @"\account\";
+            string path = HttpContext.Current.Server.MapPath("~") + @"\App_Data\Logs\";
             //string path = System.Environment.GetEnvironmentVariable("TEMP");
             if (!path.EndsWith("\\")) path += "\\";
             return path;
@@ -21,7 +21,7 @@ namespace AlpsMembershipManagement
         public static void LogMessageToFile(string msg)
         {
             System.IO.StreamWriter sw = System.IO.File.AppendText(
-                GetTempPath() + "AlpNetService.txt");
+                GetTempPath() + "ChasePayment.log");
             try
             {
                 string logLine = System.String.Format(
